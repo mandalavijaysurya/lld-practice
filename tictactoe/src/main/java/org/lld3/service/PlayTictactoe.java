@@ -29,7 +29,7 @@ public class PlayTictactoe {
 
     public Optional<Player> playTictactoe(Board board, List<Player> players) {
         int i = 0;
-        while (isBoardNotFull(board.getBoard())) {
+        while (Board.isBoardNotFull(board.getBoard())) {
             Player player = players.get(i % players.size());
             System.out.println("Enter row for move");
             int row = scanner.nextInt();
@@ -54,7 +54,7 @@ public class PlayTictactoe {
                             .put(player.getPlayerSymbol(), columnHashMaps.get(column)
                                     .getOrDefault(player.getPlayerSymbol(),0)+ 1);
             board.printBoard();
-            if(checkBoard(board, player)){
+            if(Board.checkBoard(board, player, rowHashMaps, columnHashMaps)){
                 return Optional.of(player);
             }
             i++;
@@ -62,51 +62,7 @@ public class PlayTictactoe {
         return Optional.empty();
     }
 
-    private boolean checkBoard(Board board, Player player){
-        for(HashMap<Symbol, Integer> hm: rowHashMaps){
-            for(Symbol key: hm.keySet()){
-                if(hm.get(key) == 3)
-                    return true;
-            }
-        }
 
-        for(HashMap<Symbol, Integer> hm: columnHashMaps){
-            for(Symbol key: hm.keySet()){
-                if (hm.get(key) == 3)
-                        return true;
-            }
-        }
-        List<List<Cell>> gameBoard = board.getBoard();
-        int count = 0;
-        for(int i = 0; i < gameBoard.size(); i++){
-            Cell cell = gameBoard.get(i).get(i);
-            if(cell != null && cell.getPlayerSymbol().equals(player.getPlayerSymbol())){
-                count++;
-            }
-        }
-        if(count == gameBoard.size())
-            return true;
-        count = 0;
 
-        for(int i = 0; i < gameBoard.size(); i++){
-            Cell cell = board.getBoard().get(i).get(gameBoard.size()-i-1);
-            if(cell != null && cell.getPlayerSymbol().equals(player.getPlayerSymbol())){
-                count++;
-            }
-        }
-        if(count == gameBoard.size())
-            return true;
 
-        return false;
-    }
-
-    private boolean isBoardNotFull(List<List<Cell>> board){
-        for(List<Cell> rowCell: board){
-            for(Cell cell: rowCell){
-                if(cell == null)
-                    return true;
-            }
-        }
-        return false;
-    }
 }
