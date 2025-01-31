@@ -1,5 +1,5 @@
 <div>
-	```
+	```plantum
 	@startuml Parkinglot 
 	skinparam ClassAttributeIconSize 0
 	skinparam TitleFontSize 20
