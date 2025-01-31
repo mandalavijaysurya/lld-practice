@@ -67,17 +67,6 @@ class VehicleDetails {
 }
 
 class Operator {
-class VehicleDetails {
-
-    - id : int
-    - vehicle : Vehicle
-    - entryTime : LocalDateTime
-    - exitTime : LocalDateTime
-    - operator : Operator
-
-}
-
-class Operator {
 
     - id : int
     - name : String
@@ -205,6 +194,8 @@ Slot --o Vehicle
 Gate --- Operator
 
 VehicleDetails --* Vehicle
+VehicleDetails --* Operator
+
 Ticket --* PaymentTransaction
 
 FeeCalculationStrategy --- Ticket
